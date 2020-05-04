@@ -41,6 +41,7 @@ Alternatively, you can set many settings from the command line that you'd like t
 -SharedComputerLicensing | 0,1
 -LoggingPath | [String] *Specify path*
 -SourcePath | [String] *Specify path*
+-Download | TRUE, FALSE
 -PinItemsToTaskbar  | TRUE, FALSE
 -KeepMSI | [Switch]
 

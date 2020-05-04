@@ -50,6 +50,7 @@ Param(
   [Parameter(ParameterSetName = "NoXML")][ValidateSet("TRUE","FALSE")]$EnableUpdates = "TRUE",
   [Parameter(ParameterSetName = "NoXML")][String]$LoggingPath,
   [Parameter(ParameterSetName = "NoXML")][String]$SourcePath,
+  [Parameter(ParameterSetName = "NoXML")][String]$Download,
   [Parameter(ParameterSetName = "NoXML")][ValidateSet("TRUE","FALSE")]$PinItemsToTaskbar = "TRUE",
   [Parameter(ParameterSetName = "NoXML")][Switch]$KeepMSI = $False,
   [String]$OfficeInstallDownloadPath = "C:\Scripts\Office365Install"
@@ -198,6 +199,17 @@ Try{
 }Catch{
   Write-Warning "Error running the Office Deployment Tool. The error is below:"
   Write-Warning $_
+}
+
+If($Download){
+  Try{
+    Write-Verbose "Downloading Offline Office 365"
+    $OfficeInstall = Start-Process "$OfficeInstallDownloadPath\Setup.exe" -ArgumentList "/download $ConfiguratonXMLFile" -Wait -PassThru
+  }Catch{
+    Write-Warning "Error download offline the Office install. The error is below:"
+    Write-Warning $_
+  }
+
 }
 
 #Run the O365 install
